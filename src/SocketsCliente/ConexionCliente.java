@@ -29,8 +29,6 @@ public class ConexionCliente extends Thread{
 			
 			//Creacion de la salida de datos para la lectura de mensajes
 			this.salida = new DataOutputStream(socket.getOutputStream());
-			this.salida.writeUTF("Conexion exitosa \n");
-			System.out.print("Conexion exitosa");
 
 		} catch (Exception e) {
 			
@@ -59,8 +57,8 @@ public class ConexionCliente extends Thread{
 			
 			try {
 				
-				texto = this.entrada.readLine();	
-				ChatCliente.areaMensajes.setText(ChatCliente.areaMensajes.getText() + "\n" + texto);
+				texto = this.entrada.readLine();
+				ChatCliente.areaMensajes.setText(ChatCliente.areaMensajes.getText() + "Servidor: " + texto + "\n");
 								
 			} catch (IOException e) {
 				

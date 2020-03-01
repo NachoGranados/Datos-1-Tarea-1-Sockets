@@ -45,8 +45,12 @@ public class ChatCliente {
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				MainCliente.cliente.enviarMensaje(areaTexto.getText());
-							
+				String texto = areaTexto.getText();
+				
+				MainCliente.cliente.enviarMensaje(texto);
+				areaMensajes.setText(areaMensajes.getText() + "Cliente: " + texto + "\n");
+				areaTexto.setText("");
+				
 			}
 		});
 		

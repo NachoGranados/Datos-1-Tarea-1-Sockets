@@ -45,7 +45,11 @@ public class ChatServidor {
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				MainServidor.servidor.enviarMensaje(areaTexto.getText());
+				String texto = areaTexto.getText();
+				
+				MainServidor.servidor.enviarMensaje(texto);
+				areaMensajes.setText(areaMensajes.getText() + "Servidor: " + texto + "\n");
+				areaTexto.setText("");
 		
 			}
 		});
