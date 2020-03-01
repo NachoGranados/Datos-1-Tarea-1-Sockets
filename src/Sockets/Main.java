@@ -2,7 +2,7 @@ package Sockets;
 
 public class Main {
 	
-	public static Conexion servidor, cliente;
+	public static Conexion servidor, clientet;
 
 	public static void main(String[] args) {
 		

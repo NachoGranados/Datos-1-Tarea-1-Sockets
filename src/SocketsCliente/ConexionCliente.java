@@ -1,13 +1,13 @@
-package Sockets;
+package SocketsCliente;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;   
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Conexion {
+public class ConexionCliente{
 	
 	//Creacion de variables
 	private Socket socket;
@@ -17,27 +17,7 @@ public class Conexion {
 	private BufferedReader entrada;
 	final int puerto = 1234;
 	
-	public Conexion() {
-		
-		try {
-			
-			serverSocket = new ServerSocket(puerto);
-			socket = serverSocket.accept();	
-			
-			//Creacion de entrada de datos para lectura de datos
-			entradaSocket = new InputStreamReader(socket.getInputStream());
-			entrada = new BufferedReader(entradaSocket);
-			
-			//Creacion de la salida de datos para la lectura de mensajes
-			salida = new DataOutputStream(socket.getOutputStream());
-
-		} catch (Exception e) {
-			
-		}
-		
-	}
-	
-	public Conexion(String ip) {
+	public ConexionCliente(String ip) {
 		
 		try {
 			
@@ -49,6 +29,7 @@ public class Conexion {
 			
 			//Creacion de la salida de datos para la lectura de mensajes
 			salida = new DataOutputStream(socket.getOutputStream());
+			salida.writeUTF("Conexion exitosa");
 
 		} catch (Exception e) {
 			
@@ -100,20 +81,5 @@ public class Conexion {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

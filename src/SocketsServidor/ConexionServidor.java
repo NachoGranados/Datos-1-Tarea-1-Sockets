@@ -1,13 +1,13 @@
-package Sockets;
+package SocketsServidor;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;   
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Conexion {
+public class ConexionServidor {
 	
 	//Creacion de variables
 	private Socket socket;
@@ -17,31 +17,12 @@ public class Conexion {
 	private BufferedReader entrada;
 	final int puerto = 1234;
 	
-	public Conexion() {
+	public ConexionServidor() {
 		
 		try {
 			
 			serverSocket = new ServerSocket(puerto);
 			socket = serverSocket.accept();	
-			
-			//Creacion de entrada de datos para lectura de datos
-			entradaSocket = new InputStreamReader(socket.getInputStream());
-			entrada = new BufferedReader(entradaSocket);
-			
-			//Creacion de la salida de datos para la lectura de mensajes
-			salida = new DataOutputStream(socket.getOutputStream());
-
-		} catch (Exception e) {
-			
-		}
-		
-	}
-	
-	public Conexion(String ip) {
-		
-		try {
-			
-			socket = new Socket(ip, this.puerto);
 			
 			//Creacion de entrada de datos para lectura de datos
 			entradaSocket = new InputStreamReader(socket.getInputStream());
@@ -100,20 +81,5 @@ public class Conexion {
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
