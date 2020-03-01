@@ -8,6 +8,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
 
 public class ChatServidor {
 
@@ -57,5 +58,9 @@ public class ChatServidor {
 		JTextArea areaMensajes = new JTextArea();
 		areaMensajes.setBounds(10, 45, 414, 171);
 		frame.getContentPane().add(areaMensajes);
+		
+		JLabel labelServidor = new JLabel("Servidor");
+		labelServidor.setBounds(10, 11, 60, 23);
+		frame.getContentPane().add(labelServidor);
 	}
 }
