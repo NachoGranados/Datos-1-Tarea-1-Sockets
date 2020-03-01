@@ -3,14 +3,16 @@ package Sockets;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
 
 public class ChatCliente {
 
 	private JFrame frame;
+	private JTextField areaTexto;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -24,20 +26,36 @@ public class ChatCliente {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public ChatCliente() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton botonEnviar = new JButton("Enviar");
+		botonEnviar.setBounds(335, 227, 89, 23);
+		frame.getContentPane().add(botonEnviar);
+		
+		JButton botonConectarse = new JButton("Conectarse");
+		botonConectarse.setBounds(335, 11, 89, 23);
+		frame.getContentPane().add(botonConectarse);
+		
+		JLabel labelCliente = new JLabel("Cliente");
+		labelCliente.setBounds(10, 11, 60, 23);
+		frame.getContentPane().add(labelCliente);
+		
+		areaTexto = new JTextField();
+		areaTexto.setBounds(10, 230, 315, 20);
+		frame.getContentPane().add(areaTexto);
+		areaTexto.setColumns(10);
+		
+		JTextArea areaMensajes = new JTextArea();
+		areaMensajes.setBounds(10, 45, 414, 171);
+		frame.getContentPane().add(areaMensajes);
 	}
 
 }
