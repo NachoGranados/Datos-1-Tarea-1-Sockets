@@ -2,7 +2,7 @@ package SocketsServidor;
 
 import java.awt.EventQueue;
 
-import Sockets.Main;
+import SocketsServidor.MainServidor;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 public class ChatServidor {
 
 	private JFrame frame;
-	private JTextField areaTexto;
+	public static JTextField areaTexto;
+	public static JTextArea areaMensajes;
 
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -44,7 +45,7 @@ public class ChatServidor {
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Main.servidor.enviarMensaje(areaTexto.getText());
+				MainServidor.servidor.enviarMensaje(areaTexto.getText());
 		
 			}
 		});
@@ -56,10 +57,11 @@ public class ChatServidor {
 		botonIniciarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Main.iniciarServidor();
+				MainServidor.iniciarServidor();
 				
 			}
 		});
+		
 		botonIniciarServidor.setBounds(304, 11, 120, 23);
 		frame.getContentPane().add(botonIniciarServidor);
 		
@@ -68,7 +70,7 @@ public class ChatServidor {
 		frame.getContentPane().add(areaTexto);
 		areaTexto.setColumns(10);
 		
-		JTextArea areaMensajes = new JTextArea();
+		areaMensajes = new JTextArea();
 		areaMensajes.setBounds(10, 45, 414, 171);
 		frame.getContentPane().add(areaMensajes);
 		

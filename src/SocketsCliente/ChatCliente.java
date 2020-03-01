@@ -2,7 +2,7 @@ package SocketsCliente;
 
 import java.awt.EventQueue;
 
-import Sockets.Main;
+import SocketsCliente.MainCliente;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -15,7 +15,8 @@ import java.awt.event.ActionEvent;
 public class ChatCliente {
 
 	private JFrame frame;
-	private JTextField areaTexto;
+	public static JTextField areaTexto;
+	public static JTextArea areaMensajes;
 
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -29,7 +30,7 @@ public class ChatCliente {
 			}
 		});
 	}
-
+ 
 	public ChatCliente() {
 		initialize();
 	}
@@ -44,10 +45,11 @@ public class ChatCliente {
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Main.cliente.enviarMensaje(areaTexto.getText());
+				MainCliente.cliente.enviarMensaje(areaTexto.getText());
 							
 			}
 		});
+		
 		botonEnviar.setBounds(335, 227, 89, 23);
 		frame.getContentPane().add(botonEnviar);
 		
@@ -55,10 +57,11 @@ public class ChatCliente {
 		botonConectarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Main.iniciarCliente("127.0.0.1");
+				MainCliente.iniciarCliente("127.0.0.1");
 				
 			}
 		});
+		
 		botonConectarse.setBounds(335, 11, 89, 23);
 		frame.getContentPane().add(botonConectarse);
 		
@@ -71,7 +74,7 @@ public class ChatCliente {
 		frame.getContentPane().add(areaTexto);
 		areaTexto.setColumns(10);
 		
-		JTextArea areaMensajes = new JTextArea();
+		areaMensajes = new JTextArea();
 		areaMensajes.setBounds(10, 45, 414, 171);
 		frame.getContentPane().add(areaMensajes);
 	}

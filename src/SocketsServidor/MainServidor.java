@@ -1,8 +1,5 @@
 package SocketsServidor;
 
-import Sockets.ChatServidor;
-import Sockets.Conexion;
-
 public class MainServidor {
 
 	public static ConexionServidor servidor;
@@ -16,7 +13,8 @@ public class MainServidor {
 	
 	public static void iniciarServidor() {
 		
-		servidor = new ConexionServidor();		
+		servidor = new ConexionServidor();
+		servidor.start();
 				
 	}
 

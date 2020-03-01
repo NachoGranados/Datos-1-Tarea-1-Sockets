@@ -1,7 +1,4 @@
-package SocketsCliente;
-
-import Sockets.ChatServidor;
-import Sockets.Conexion;
+ package SocketsCliente;
 
 public class MainCliente {
 	
@@ -9,14 +6,15 @@ public class MainCliente {
 
 	public static void main(String[] args) {
 		
-		ChatServidor servidor = new ChatServidor();
-		servidor.main();
+		ChatCliente cliente = new ChatCliente();
+		cliente.main();
 
 	}
 	
 	public static void iniciarCliente(String ip) {
 		
 		cliente = new ConexionCliente(ip);
+		cliente.start();
 		
 	}
 }

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ConexionCliente{
+public class ConexionCliente extends Thread{
 	
 	//Creacion de variables
 	private Socket socket;
@@ -16,20 +16,21 @@ public class ConexionCliente{
 	private DataOutputStream salida;
 	private BufferedReader entrada;
 	final int puerto = 1234;
-	
+	 
 	public ConexionCliente(String ip) {
 		
 		try {
 			
-			socket = new Socket(ip, this.puerto);
+			this.socket = new Socket(ip, puerto);
 			
 			//Creacion de entrada de datos para lectura de datos
-			entradaSocket = new InputStreamReader(socket.getInputStream());
-			entrada = new BufferedReader(entradaSocket);
+			this.entradaSocket = new InputStreamReader(socket.getInputStream());
+			this.entrada = new BufferedReader(entradaSocket);
 			
 			//Creacion de la salida de datos para la lectura de mensajes
-			salida = new DataOutputStream(socket.getOutputStream());
-			salida.writeUTF("Conexion exitosa");
+			this.salida = new DataOutputStream(socket.getOutputStream());
+			this.salida.writeUTF("Conexion exitosa \n");
+			System.out.print("Conexion exitosa");
 
 		} catch (Exception e) {
 			
@@ -41,7 +42,8 @@ public class ConexionCliente{
 		
 		try {
 			
-			salida.writeUTF(mensaje);
+			this.salida = new DataOutputStream(socket.getOutputStream());
+			this.salida.writeUTF(mensaje + "\n");
 			
 		} catch (IOException e) {
 			
@@ -49,16 +51,22 @@ public class ConexionCliente{
 				
 	}
 	
-	public String leerMensaje() {
+	public void run() {
 		
-		try {
+		String texto;
+		
+		while(true) {
 			
-			return entrada.readLine();
+			try {
+				
+				texto = this.entrada.readLine();	
+				ChatCliente.areaMensajes.setText(ChatCliente.areaMensajes.getText() + "\n" + texto);
+								
+			} catch (IOException e) {
+				
+			}			
 			
-		} catch (IOException e) {
-			
-		}
-		return null;
+		}					
 		
 	}
 	

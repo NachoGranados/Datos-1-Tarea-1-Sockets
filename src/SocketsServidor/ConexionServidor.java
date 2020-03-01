@@ -7,7 +7,9 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ConexionServidor {
+import SocketsServidor.ChatServidor;
+
+public class ConexionServidor extends Thread{
 	
 	//Creacion de variables
 	private Socket socket;
@@ -17,6 +19,7 @@ public class ConexionServidor {
 	private BufferedReader entrada;
 	final int puerto = 1234;
 	
+	/*
 	public ConexionServidor() {
 		
 		try {
@@ -37,16 +40,49 @@ public class ConexionServidor {
 		
 	}
 	
+	/*/
+	
 	public void enviarMensaje(String mensaje) {
 		
 		try {
 			
-			salida.writeUTF(mensaje);
+			this.salida.writeUTF(mensaje + "\n");
 			
 		} catch (IOException e) {
 			
 		}
 				
+	}
+	
+	public void run() {
+		
+		String texto;
+		
+		try {
+			System.out.print("Estoy pasando por aqui");
+				
+			this.serverSocket = new ServerSocket(puerto);
+			this.socket = serverSocket.accept();	
+			
+			//Creacion de entrada de datos para lectura de datos
+			this.entradaSocket = new InputStreamReader(socket.getInputStream());
+			this.entrada = new BufferedReader(entradaSocket);
+			
+			//Creacion de la salida de datos para la lectura de mensajes
+			this.salida = new DataOutputStream(socket.getOutputStream());
+				
+			while(true) {
+			
+				texto = this.entrada.readLine();
+				System.out.print(texto);
+				ChatServidor.areaMensajes.setText(ChatServidor.areaMensajes.getText() + "\n" + texto);		
+						
+			}
+			
+		} catch (IOException e) {
+		
+		}
+		
 	}
 	
 	public String leerMensaje() {
@@ -55,7 +91,7 @@ public class ConexionServidor {
 			
 			return entrada.readLine();
 			
-		} catch (IOException e) {
+		} catch(IOException e) {
 			
 		}
 		return null;
