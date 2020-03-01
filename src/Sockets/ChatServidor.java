@@ -2,6 +2,8 @@ package Sockets;
 
 import java.awt.EventQueue;
 
+import Sockets.Main;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -15,7 +17,7 @@ public class ChatServidor {
 	private JFrame frame;
 	private JTextField areaTexto;
 
-	public static void main(String[] args) {
+	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -41,13 +43,24 @@ public class ChatServidor {
 		JButton botonEnviar = new JButton("Enviar");
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				Main.servidor.enviarMensaje(areaTexto.getText());
+		
 			}
 		});
+		
 		botonEnviar.setBounds(335, 227, 89, 23);
 		frame.getContentPane().add(botonEnviar);
 		
 		JButton botonIniciarServidor = new JButton("Iniciar Servidor");
-		botonIniciarServidor.setBounds(319, 11, 105, 23);
+		botonIniciarServidor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Main.iniciarServidor();
+				
+			}
+		});
+		botonIniciarServidor.setBounds(304, 11, 120, 23);
 		frame.getContentPane().add(botonIniciarServidor);
 		
 		areaTexto = new JTextField();

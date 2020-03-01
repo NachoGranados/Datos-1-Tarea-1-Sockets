@@ -2,18 +2,22 @@ package Sockets;
 
 import java.awt.EventQueue;
 
+import Sockets.Main;
+
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ChatCliente {
 
 	private JFrame frame;
 	private JTextField areaTexto;
 
-	public static void main(String[] args) {
+	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -37,10 +41,24 @@ public class ChatCliente {
 		frame.getContentPane().setLayout(null);
 		
 		JButton botonEnviar = new JButton("Enviar");
+		botonEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Main.cliente.enviarMensaje(areaTexto.getText());
+							
+			}
+		});
 		botonEnviar.setBounds(335, 227, 89, 23);
 		frame.getContentPane().add(botonEnviar);
 		
 		JButton botonConectarse = new JButton("Conectarse");
+		botonConectarse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Main.iniciarCliente("127.0.0.1");
+				
+			}
+		});
 		botonConectarse.setBounds(335, 11, 89, 23);
 		frame.getContentPane().add(botonConectarse);
 		
