@@ -1,7 +1,6 @@
 package SocketsVentanaInicio;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -10,7 +9,6 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
-
 import SocketsServidor.MainServidor;
 import SocketsServidor.ChatServidor;
 import SocketsServidor.ConexionServidor;
@@ -24,22 +22,9 @@ public class VentanaInicio {
 	private JTextField areaPuerto;
 	private JTextArea areaPuertosConsultados;
 	public static ArrayList<String> listaPuertos = new ArrayList<String>();
+	public static boolean cargar;
+	public static String puerto;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -72,7 +57,8 @@ public class VentanaInicio {
 			public void actionPerformed(ActionEvent e) {
 				
 				String nombre = areaNombre.getText();
-				String puerto = areaPuerto.getText();
+				puerto = areaPuerto.getText();
+				cargar = false;
 				
 				if(nombre == "" || puerto == "") {
 					
@@ -83,17 +69,28 @@ public class VentanaInicio {
 					if(listaPuertos.contains(puerto) == false) {
 						
 						listaPuertos.add(puerto);
+						areaPuertosConsultados.setText(areaPuertosConsultados.getText() + "\n" + puerto);
+						areaPuerto.setText("");
 						
+					} else {
+						
+						cargar = true;
+						
+					}
+												
 					ConexionServidor.puerto = Integer.parseInt(puerto);
 					ConexionCliente.puerto = Integer.parseInt(puerto);
 					MainServidor.main();
 					MainCliente.main();					
-					areaPuertosConsultados.setText(areaPuertosConsultados.getText() + "\n" + puerto);
-					ChatServidor.listaConversaciones.add("");
-					}
+
+					if(cargar != true) {
+						
+						ChatServidor.listaConversaciones.add(puerto);
+						
+					}					
 				
-			} 
-		}
+				} 
+			}
 				
 		});
 		

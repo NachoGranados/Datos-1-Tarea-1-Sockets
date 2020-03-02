@@ -12,8 +12,8 @@ import SocketsServidor.ChatServidor;
 public class ConexionServidor extends Thread{
 	
 	//Creacion de variables
-	private Socket socket;
-	private ServerSocket serverSocket;
+	static Socket socket;
+	static ServerSocket serverSocket;
 	private InputStreamReader entradaSocket;
 	private DataOutputStream salida;
 	private BufferedReader entrada;
@@ -37,8 +37,8 @@ public class ConexionServidor extends Thread{
 		
 		try {
 				
-			this.serverSocket = new ServerSocket(puerto);
-			this.socket = serverSocket.accept();	
+			ConexionServidor.serverSocket = new ServerSocket(puerto);
+			ConexionServidor.socket = serverSocket.accept();	
 			
 			//Creacion de entrada de datos para lectura de datos
 			this.entradaSocket = new InputStreamReader(socket.getInputStream());
@@ -60,16 +60,16 @@ public class ConexionServidor extends Thread{
 		
 	}
 	
-	public String leerMensaje() {
+	public void desconectar() {
 		
 		try {
 			
-			return entrada.readLine();
+			socket.close();
+			serverSocket.close();
 			
-		} catch(IOException e) {
+		} catch (IOException e) {
 			
 		}
-		return null;
 		
 	}
 

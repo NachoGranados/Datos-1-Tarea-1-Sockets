@@ -1,40 +1,28 @@
 package SocketsServidor;
 
 import java.awt.EventQueue;
-
 import SocketsServidor.MainServidor;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
-
 import SocketsVentanaInicio.VentanaInicio;
-
-
 
 public class ChatServidor {
 
 	private JFrame frame;
 	public static JTextField areaTexto;
 	public static JTextArea areaMensajes;
-	private JScrollPane scrollPane;
-	
-	
-	
-	
+	private JScrollPane scrollPane;	
 	public static ArrayList<String> listaConversaciones = new ArrayList<String>();
-	
-	
-	
-	
-	
-	
+	private JButton botonCerrarChat;	
+	public int indice;
 
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -63,7 +51,7 @@ public class ChatServidor {
 		botonEnviar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
-				
+								
 				String texto = areaTexto.getText();
 				int longitud = VentanaInicio.listaPuertos.size() - 1;
 				
@@ -71,13 +59,22 @@ public class ChatServidor {
 					
 					longitud = 0;
 					
-				}
-				
+				}		
+					
 				MainServidor.servidor.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Servidor: " + texto + "\n");
 				areaTexto.setText("");
-				listaConversaciones.set(longitud, areaMensajes.getText());
-		
+				
+				if(VentanaInicio.cargar == true) {	
+					
+					listaConversaciones.set(indice, areaMensajes.getText());
+												
+				} else {
+					
+					listaConversaciones.set(longitud, areaMensajes.getText());
+					
+				}
+						
 			}
 		});
 		
@@ -88,12 +85,22 @@ public class ChatServidor {
 		botonIniciarServidor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				MainServidor.iniciarServidor();
+				indice = VentanaInicio.listaPuertos.indexOf(VentanaInicio.puerto);
 				
+				MainServidor.iniciarServidor();				
+				
+				if(VentanaInicio.cargar == true) {
+					
+					String conversacion = listaConversaciones.get(indice);
+					
+					areaMensajes.setText(conversacion);
+					
+				}
+					
 			}
 		});
 		
-		botonIniciarServidor.setBounds(304, 11, 120, 23);
+		botonIniciarServidor.setBounds(174, 11, 120, 23);
 		frame.getContentPane().add(botonIniciarServidor);
 		
 		areaTexto = new JTextField();
@@ -111,5 +118,23 @@ public class ChatServidor {
 		
 		areaMensajes = new JTextArea();
 		scrollPane.setViewportView(areaMensajes);
+		
+		botonCerrarChat = new JButton("Cerrar Chat");
+		botonCerrarChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evento) {
+				
+				try {
+					
+					VentanaInicio.cargar = false;
+					ConexionServidor.serverSocket.close();
+					
+				} catch (IOException e){
+					
+				}
+				
+			}
+		});
+		botonCerrarChat.setBounds(304, 11, 120, 23);
+		frame.getContentPane().add(botonCerrarChat);
 	}
 }

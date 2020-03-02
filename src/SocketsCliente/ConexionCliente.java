@@ -10,8 +10,8 @@ import java.net.Socket;
 public class ConexionCliente extends Thread{
 	
 	//Creacion de variables
-	private Socket socket;
-	private ServerSocket serverSocket;
+	static Socket socket;
+	static ServerSocket serverSocket;
 	private InputStreamReader entradaSocket;
 	private DataOutputStream salida;
 	private BufferedReader entrada;
@@ -21,7 +21,7 @@ public class ConexionCliente extends Thread{
 		
 		try {
 			
-			this.socket = new Socket(ip, puerto);
+			ConexionCliente.socket = new Socket(ip, puerto);
 			
 			//Creacion de entrada de datos para lectura de datos
 			this.entradaSocket = new InputStreamReader(socket.getInputStream());
@@ -65,26 +65,6 @@ public class ConexionCliente extends Thread{
 			}			
 			
 		}					
-		
-	}
-	
-	public void desconectar() {
-		
-		try {
-			
-			socket.close();
-			
-		} catch (Exception e) {
-			
-		}
-		
-		try {
-			
-			serverSocket.close();
-			
-		} catch (Exception e) {
-			
-		}
 		
 	}
 

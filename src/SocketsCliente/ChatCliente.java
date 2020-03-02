@@ -1,11 +1,9 @@
 package SocketsCliente;
 
 import java.awt.EventQueue;
-
 import SocketsCliente.MainCliente;
 import SocketsServidor.ChatServidor;
 import SocketsVentanaInicio.VentanaInicio;
-
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,8 +17,9 @@ public class ChatCliente {
 
 	private JFrame frame;
 	public static JTextField areaTexto;
-	public static JTextArea areaMensajes;
-
+	public static JTextArea areaMensajes;	
+	int indice;	
+	
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -60,7 +59,17 @@ public class ChatCliente {
 				MainCliente.cliente.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Cliente: " + texto + "\n");
 				areaTexto.setText("");
-				ChatServidor.listaConversaciones.set(longitud, areaMensajes.getText());
+				
+				
+				if(VentanaInicio.cargar == true) {	
+					
+					ChatServidor.listaConversaciones.set(indice, areaMensajes.getText());	
+												
+				} else {
+					
+					ChatServidor.listaConversaciones.set(longitud, areaMensajes.getText());
+					
+				}
 				
 			}
 		});
@@ -68,11 +77,21 @@ public class ChatCliente {
 		frame.getContentPane().add(botonEnviar);
 		
 		JButton botonConectarse = new JButton("Conectarse");
-		botonConectarse.setBounds(335, 11, 89, 23);
+		botonConectarse.setBounds(294, 11, 130, 23);
 		botonConectarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				MainCliente.iniciarCliente("127.0.0.1");				
+				MainCliente.iniciarCliente("127.0.0.1");
+				
+				indice = VentanaInicio.listaPuertos.indexOf(VentanaInicio.puerto);
+				
+				if(VentanaInicio.cargar == true) {					
+				
+					String conversacion = ChatServidor.listaConversaciones.get(indice);
+					
+					areaMensajes.setText(conversacion);
+					
+				}
 				
 			}
 		});
@@ -92,7 +111,7 @@ public class ChatCliente {
 		frame.getContentPane().add(scrollPane);
 		
 		areaMensajes = new JTextArea();
-		scrollPane.setViewportView(areaMensajes);	
+		scrollPane.setViewportView(areaMensajes);
 				
 	}
 }
