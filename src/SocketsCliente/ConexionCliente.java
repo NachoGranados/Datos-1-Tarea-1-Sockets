@@ -15,8 +15,7 @@ public class ConexionCliente extends Thread{
 	private InputStreamReader entradaSocket;
 	private DataOutputStream salida;
 	private BufferedReader entrada;
-	final int puerto = 1234;
-	int puertoCliente;
+	public static int puerto;
 	 
 	public ConexionCliente(String ip) {
 		
@@ -31,7 +30,7 @@ public class ConexionCliente extends Thread{
 			//Creacion de la salida de datos para la lectura de mensajes
 			this.salida = new DataOutputStream(socket.getOutputStream());
 			
-			this.puertoCliente = socket.getPort();
+			System.out.print(puerto);
 
 		} catch (Exception e) {
 			
@@ -45,7 +44,6 @@ public class ConexionCliente extends Thread{
 			
 			this.salida = new DataOutputStream(socket.getOutputStream());
 			this.salida.writeUTF(mensaje + "\n");
-			System.out.print(puertoCliente);
 			
 		} catch (IOException e) {
 			

@@ -4,7 +4,7 @@ public class MainCliente {
 	
 	public static ConexionCliente cliente;
 
-	public static void main(String[] args) {
+	public static void main() {
 		
 		ChatCliente cliente = new ChatCliente();
 		cliente.main();

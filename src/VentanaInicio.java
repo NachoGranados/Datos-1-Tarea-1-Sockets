@@ -5,6 +5,13 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import SocketsServidor.MainServidor;
+import SocketsServidor.ConexionServidor;
+import SocketsCliente.ConexionCliente;
+import SocketsCliente.MainCliente;
 
 public class VentanaInicio {
 
@@ -12,9 +19,6 @@ public class VentanaInicio {
 	private JTextField areaNombre;
 	private JTextField areaPuerto;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -27,17 +31,11 @@ public class VentanaInicio {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public VentanaInicio() {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
@@ -49,11 +47,32 @@ public class VentanaInicio {
 		frame.getContentPane().add(labelPuertosConsultados);
 		
 		JButton botonNuevoChat = new JButton("Nuevo Chat");
-		botonNuevoChat.setBounds(145, 125, 89, 23);
+		botonNuevoChat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nombre = areaNombre.getText();
+				String puerto = areaPuerto.getText();
+				
+				if(nombre == "" || puerto == "") {
+					
+					System.out.print("No se puede ejecutar el chat");
+					
+				} else {
+					
+					ConexionServidor.puerto = Integer.parseInt(puerto);
+					ConexionCliente.puerto = Integer.parseInt(puerto);
+					MainServidor.main();
+					MainCliente.main();
+					
+				}
+				
+			}
+		});
+		botonNuevoChat.setBounds(145, 125, 125, 23);
 		frame.getContentPane().add(botonNuevoChat);
 		
 		JTextArea areaPuertosConsultados = new JTextArea();
-		areaPuertosConsultados.setBounds(10, 36, 99, 214);
+		areaPuertosConsultados.setBounds(10, 36, 119, 214);
 		frame.getContentPane().add(areaPuertosConsultados);
 		
 		areaNombre = new JTextField();
@@ -62,11 +81,11 @@ public class VentanaInicio {
 		areaNombre.setColumns(10);
 		
 		JLabel labelNombre = new JLabel("Digite su nombre:");
-		labelNombre.setBounds(145, 11, 89, 14);
+		labelNombre.setBounds(145, 11, 279, 14);
 		frame.getContentPane().add(labelNombre);
 		
 		JLabel labelPuerto = new JLabel("Digite el puerto al cual quiere conectarse:");
-		labelPuerto.setBounds(145, 69, 199, 14);
+		labelPuerto.setBounds(145, 69, 279, 14);
 		frame.getContentPane().add(labelPuerto);
 		
 		areaPuerto = new JTextField();

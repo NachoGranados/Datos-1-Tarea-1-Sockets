@@ -17,7 +17,7 @@ public class ConexionServidor extends Thread{
 	private InputStreamReader entradaSocket;
 	private DataOutputStream salida;
 	private BufferedReader entrada;
-	final int puerto = 1234;
+	public static int puerto;
 	
 	public void enviarMensaje(String mensaje) {
 		
