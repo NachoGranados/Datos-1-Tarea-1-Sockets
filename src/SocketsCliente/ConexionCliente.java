@@ -29,8 +29,6 @@ public class ConexionCliente extends Thread{
 			
 			//Creacion de la salida de datos para la lectura de mensajes
 			this.salida = new DataOutputStream(socket.getOutputStream());
-			
-			System.out.print(puerto);
 
 		} catch (Exception e) {
 			

@@ -72,25 +72,5 @@ public class ConexionServidor extends Thread{
 		return null;
 		
 	}
-	
-	public void desconectar() {
-		
-		try {
-			
-			socket.close();
-			
-		} catch (Exception e) {
-			
-		}
-		
-		try {
-			
-			serverSocket.close();
-			
-		} catch (Exception e) {
-			
-		}
-		
-	}
 
 }

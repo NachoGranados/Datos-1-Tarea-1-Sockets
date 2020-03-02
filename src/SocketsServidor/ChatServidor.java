@@ -9,9 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
+
+import SocketsVentanaInicio.VentanaInicio;
+
+
 
 public class ChatServidor {
 
@@ -19,6 +24,17 @@ public class ChatServidor {
 	public static JTextField areaTexto;
 	public static JTextArea areaMensajes;
 	private JScrollPane scrollPane;
+	
+	
+	
+	
+	public static ArrayList<String> listaConversaciones = new ArrayList<String>();
+	
+	
+	
+	
+	
+	
 
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,18 +56,27 @@ public class ChatServidor {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton botonEnviar = new JButton("Enviar");
 		botonEnviar.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				
 				String texto = areaTexto.getText();
+				int longitud = VentanaInicio.listaPuertos.size() - 1;
+				
+				if(longitud < 0) {
+					
+					longitud = 0;
+					
+				}
 				
 				MainServidor.servidor.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Servidor: " + texto + "\n");
 				areaTexto.setText("");
+				listaConversaciones.set(longitud, areaMensajes.getText());
 		
 			}
 		});

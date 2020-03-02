@@ -3,6 +3,8 @@ package SocketsCliente;
 import java.awt.EventQueue;
 
 import SocketsCliente.MainCliente;
+import SocketsServidor.ChatServidor;
+import SocketsVentanaInicio.VentanaInicio;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -39,7 +41,7 @@ public class ChatCliente {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JButton botonEnviar = new JButton("Enviar");
 		botonEnviar.setBounds(335, 227, 89, 23);
@@ -47,10 +49,19 @@ public class ChatCliente {
 			public void actionPerformed(ActionEvent e) {
 				
 				String texto = areaTexto.getText();
+				int longitud = VentanaInicio.listaPuertos.size() - 1;
+								
+				if(longitud < 0) {
+					
+					longitud = 0;
+					
+				}
 				
 				MainCliente.cliente.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Cliente: " + texto + "\n");
 				areaTexto.setText("");
+				ChatServidor.listaConversaciones.set(longitud, areaMensajes.getText());
+				
 			}
 		});
 		frame.getContentPane().setLayout(null);
@@ -61,8 +72,7 @@ public class ChatCliente {
 		botonConectarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				MainCliente.iniciarCliente("127.0.0.1");
-				
+				MainCliente.iniciarCliente("127.0.0.1");				
 				
 			}
 		});

@@ -1,3 +1,5 @@
+package SocketsVentanaInicio;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,9 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import SocketsServidor.MainServidor;
+import SocketsServidor.ChatServidor;
 import SocketsServidor.ConexionServidor;
 import SocketsCliente.ConexionCliente;
 import SocketsCliente.MainCliente;
@@ -18,6 +22,23 @@ public class VentanaInicio {
 	private JFrame frame;
 	private JTextField areaNombre;
 	private JTextField areaPuerto;
+	private JTextArea areaPuertosConsultados;
+	public static ArrayList<String> listaPuertos = new ArrayList<String>();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,19 +80,27 @@ public class VentanaInicio {
 					
 				} else {
 					
+					if(listaPuertos.contains(puerto) == false) {
+						
+						listaPuertos.add(puerto);
+						
 					ConexionServidor.puerto = Integer.parseInt(puerto);
 					ConexionCliente.puerto = Integer.parseInt(puerto);
 					MainServidor.main();
-					MainCliente.main();
-					
-				}
+					MainCliente.main();					
+					areaPuertosConsultados.setText(areaPuertosConsultados.getText() + "\n" + puerto);
+					ChatServidor.listaConversaciones.add("");
+					}
 				
-			}
+			} 
+		}
+				
 		});
+		
 		botonNuevoChat.setBounds(145, 125, 125, 23);
 		frame.getContentPane().add(botonNuevoChat);
 		
-		JTextArea areaPuertosConsultados = new JTextArea();
+		areaPuertosConsultados = new JTextArea();
 		areaPuertosConsultados.setBounds(10, 36, 119, 214);
 		frame.getContentPane().add(areaPuertosConsultados);
 		
@@ -93,4 +122,5 @@ public class VentanaInicio {
 		frame.getContentPane().add(areaPuerto);
 		areaPuerto.setColumns(10);
 	}
+	
 }

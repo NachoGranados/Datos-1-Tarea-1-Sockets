@@ -1,4 +1,4 @@
- package SocketsCliente;
+package SocketsCliente;
 
 public class MainCliente {
 	
