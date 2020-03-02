@@ -48,9 +48,9 @@ public class ConexionServidor extends Thread{
 			this.salida = new DataOutputStream(socket.getOutputStream());
 				
 			while(true) {
-			
+				
 				texto = this.entrada.readLine();
-				ChatServidor.areaMensajes.setText(ChatServidor.areaMensajes.getText() + "Cliente: " + texto + "\n");		
+				ChatServidor.areaMensajes.setText(ChatServidor.areaMensajes.getText() + "Cliente: " + texto + "\n");
 						
 			}
 			

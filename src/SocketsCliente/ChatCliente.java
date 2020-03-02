@@ -7,6 +7,7 @@ import SocketsCliente.MainCliente;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
@@ -39,9 +40,9 @@ public class ChatCliente {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
 		
 		JButton botonEnviar = new JButton("Enviar");
+		botonEnviar.setBounds(335, 227, 89, 23);
 		botonEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -50,23 +51,21 @@ public class ChatCliente {
 				MainCliente.cliente.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Cliente: " + texto + "\n");
 				areaTexto.setText("");
-				
 			}
 		});
-		
-		botonEnviar.setBounds(335, 227, 89, 23);
+		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(botonEnviar);
 		
 		JButton botonConectarse = new JButton("Conectarse");
+		botonConectarse.setBounds(335, 11, 89, 23);
 		botonConectarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				MainCliente.iniciarCliente("127.0.0.1");
 				
+				
 			}
 		});
-		
-		botonConectarse.setBounds(335, 11, 89, 23);
 		frame.getContentPane().add(botonConectarse);
 		
 		JLabel labelCliente = new JLabel("Cliente");
@@ -78,9 +77,12 @@ public class ChatCliente {
 		frame.getContentPane().add(areaTexto);
 		areaTexto.setColumns(10);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 45, 414, 171);
+		frame.getContentPane().add(scrollPane);
+		
 		areaMensajes = new JTextArea();
-		areaMensajes.setBounds(10, 45, 414, 171);
-		frame.getContentPane().add(areaMensajes);
+		scrollPane.setViewportView(areaMensajes);	
+				
 	}
-
 }

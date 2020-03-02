@@ -11,12 +11,14 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 
 public class ChatServidor {
 
 	private JFrame frame;
 	public static JTextField areaTexto;
 	public static JTextArea areaMensajes;
+	private JScrollPane scrollPane;
 
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
@@ -74,12 +76,15 @@ public class ChatServidor {
 		frame.getContentPane().add(areaTexto);
 		areaTexto.setColumns(10);
 		
-		areaMensajes = new JTextArea();
-		areaMensajes.setBounds(10, 45, 414, 171);
-		frame.getContentPane().add(areaMensajes);
-		
 		JLabel labelServidor = new JLabel("Servidor");
 		labelServidor.setBounds(10, 11, 60, 23);
 		frame.getContentPane().add(labelServidor);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 45, 414, 171);
+		frame.getContentPane().add(scrollPane);
+		
+		areaMensajes = new JTextArea();
+		scrollPane.setViewportView(areaMensajes);
 	}
 }
