@@ -13,6 +13,13 @@ import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Esta clase permite manejar la creacion y establecimiento de la 
+ * interfaz grafica del chat del cliente junto con sus respectivas
+ * funcionalidades de los elementos graficos que se encuentra en ella.
+ * 
+ * @author Ignacio Granados
+ */
 public class ChatCliente {
 
 	//Creacion de variables.
@@ -21,6 +28,10 @@ public class ChatCliente {
 	public static JTextArea areaMensajes;	
 	int indice;	
 	
+	/**
+	 * Este metodo corresponde al metodo principal de esta clase el cual se
+	 * encarga de crear la interfaz grafica.
+	 */
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,10 +45,18 @@ public class ChatCliente {
 		});
 	}
  
+	/**
+	 * Este metodo corresponde al metodo que se encarga de inicializar la
+	 * interfaz grafica.
+	 */
 	public ChatCliente() {
 		initialize();
 	}
 
+	/**
+	 * Este metodo se encarga de agregar todos los objetos graficos de la interfaz
+	 * grafica junto con su respectiva funcionalidad dentro del sistema.
+	 */	
 	private void initialize() {
 		
 		frame = new JFrame();
@@ -48,6 +67,10 @@ public class ChatCliente {
 		botonEnviar.setBounds(335, 227, 89, 23);
 		botonEnviar.addActionListener(new ActionListener() {
 			
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *Enviar cada vez que sea presionado.
+			 */	
 			public void actionPerformed(ActionEvent e) {
 				
 				//Asignacion de datos a algunas variables creadas.
@@ -85,6 +108,11 @@ public class ChatCliente {
 		JButton botonConectarse = new JButton("Conectarse");
 		botonConectarse.setBounds(294, 11, 130, 23);
 		botonConectarse.addActionListener(new ActionListener() {
+			
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *Conectarse cada vez que sea presionado.
+			 */	
 			public void actionPerformed(ActionEvent e) {
 				
 				//Asignacion del ip de la computadora

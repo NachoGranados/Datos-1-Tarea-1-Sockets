@@ -14,6 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import SocketsVentanaInicio.VentanaInicio;
 
+/**
+ * Esta clase permite manejar la creacion y establecimiento de la 
+ * interfaz grafica del chat del servidor junto con sus respectivas
+ * funcionalidades de los elementos graficos que se encuentra en ella.
+ * 
+ * @author Ignacio Granados
+ */
 public class ChatServidor {
 
 	//Creacion de variables.
@@ -25,6 +32,10 @@ public class ChatServidor {
 	private JButton botonCerrarChat;	
 	public int indice;
 
+	/**
+	 * Este metodo corresponde al metodo principal de esta clase el cual se
+	 * encarga de crear la interfaz grafica.
+	 */
 	public void main() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -38,11 +49,20 @@ public class ChatServidor {
 		});
 	}
 
+	/**
+	 * Este metodo corresponde al metodo que se encarga de inicializar la
+	 * interfaz grafica.
+	 */
 	public ChatServidor() {
 		initialize();
 	}
 
+	/**
+	 * Este metodo se encarga de agregar todos los objetos graficos de la interfaz
+	 * grafica junto con su respectiva funcionalidad dentro del sistema.
+	 */	
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -51,6 +71,10 @@ public class ChatServidor {
 		JButton botonEnviar = new JButton("Enviar");
 		botonEnviar.addActionListener(new ActionListener() {
 
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *Enviar cada vez que sea presionado.
+			 */	
 			public void actionPerformed(ActionEvent e) {
 								
 				//Asignacion de datos a algunas variables creadas.
@@ -88,6 +112,10 @@ public class ChatServidor {
 		JButton botonIniciarServidor = new JButton("Iniciar Servidor");
 		botonIniciarServidor.addActionListener(new ActionListener() {
 			
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *Iniciar Servidor cada vez que sea presionado.
+			 */	
 			public void actionPerformed(ActionEvent e) {
 				
 				//Creacion de esta variable.
@@ -130,6 +158,10 @@ public class ChatServidor {
 		botonCerrarChat = new JButton("Cerrar Chat");
 		botonCerrarChat.addActionListener(new ActionListener() {
 			
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *Cerrar Chat cada vez que sea presionado.
+			 */	
 			public void actionPerformed(ActionEvent evento) {
 				
 				try {

@@ -9,6 +9,12 @@ import java.net.Socket;
 
 import SocketsServidor.ChatServidor;
 
+/**
+ * Esta clase permite manejar la creacion del socket  del servidor junto
+ * con sus repectivas funcionalidades de envio y recibo de mensajes.
+ * 
+ * @author Ignacio Granados *
+ */
 public class ConexionServidor extends Thread{
 	
 	//Creacion de variables.
@@ -19,6 +25,12 @@ public class ConexionServidor extends Thread{
 	private BufferedReader entrada;
 	public static int puerto;
 	
+	/**
+	 * Este metodo permite enviarle un mensaje al respectivo cliente
+	 * con el cual se encuentre conectado.
+	 * 
+	 * @param mensaje - Mensaje a enviar.
+	 */
 	public void enviarMensaje(String mensaje) {
 		
 		try {
@@ -32,6 +44,9 @@ public class ConexionServidor extends Thread{
 				
 	}
 	
+	/**
+	 * Este metodo se encarga de inicializar o correr el hilo del servidor.
+	 */
 	public void run() {
 		
 		String texto;

@@ -18,6 +18,13 @@ import SocketsCliente.MainCliente;
 import javax.swing.JScrollPane;
 import java.awt.Font;
 
+/**
+ * Esta clase permite manejar la creacion y establecimiento de sockets
+ * mediante una unica ventana capaz de ligar todas las demás clases
+ * del programa. 
+ * 
+ * @author Ignacio Granados
+ */
 public class VentanaInicio {
 
 	private JFrame frame;
@@ -25,8 +32,14 @@ public class VentanaInicio {
 	private JTextArea areaPuertosConsultados;
 	public static ArrayList<String> listaPuertos = new ArrayList<String>();
 	public static boolean cargar;
-	public static String puerto;
+	public static String puerto;	
 	
+	/**
+	 * Este metodo corresponde al metodo principal de esta clase el cual se
+	 * encarga de crear la interfaz grafica.
+	 * 
+	 * @param args - Respectivo parametro del metodo main.
+	 */	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,12 +52,21 @@ public class VentanaInicio {
 			}
 		});
 	}
-	
+		
+	/**
+	 * Este metodo corresponde al metodo que se encarga de inicializar la
+	 * interfaz grafica.
+	 */	
 	public VentanaInicio() {
 		initialize();
 	}
 
+	/**
+	 * Este metodo se encarga de agregar todos los objetos graficos de la interfaz
+	 * grafica junto con su respectiva funcionalidad dentro del sistema.
+	 */	
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,6 +81,10 @@ public class VentanaInicio {
 		botonNuevoChat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		botonNuevoChat.addActionListener(new ActionListener() {
 			
+			/**
+			 *Este metodo corresponde a la funcionalidad que realizara el boton
+			 *NuevoChat cada vez que sea presionado.
+			 */			
 			public void actionPerformed(ActionEvent evento) {
 				
 				//Creacion de variables

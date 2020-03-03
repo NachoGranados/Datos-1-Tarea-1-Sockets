@@ -7,6 +7,12 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Esta clase permite manejar la creacion del socket  del cliente junto
+ * con sus repectivas funcionalidades de envio y recibo de mensajes.
+ * 
+ * @author Ignacio Granados *
+ */
 public class ConexionCliente extends Thread{
 	
 	//Creacion de variables.
@@ -17,6 +23,14 @@ public class ConexionCliente extends Thread{
 	private BufferedReader entrada;
 	public static int puerto;
 	 
+	
+	/**
+	 * Este metodo permite el envio y recibido de mensajes provenientes del
+	 * servidor al cual se encuentre conectado dicho cliente.
+	 * 
+	 * @param ip - Ip para indicarle a la computadora que se abriran conexiones
+	 * dentro de ella misma.
+	 */
 	public ConexionCliente(String ip) {
 		
 		try {
@@ -37,6 +51,12 @@ public class ConexionCliente extends Thread{
 		
 	}
 	
+	/**
+	 * Este metodo permite enviarle un mensaje al respectivo servidor
+	 * con el cual se encuentre conectado.
+	 * 
+	 * @param mensaje - Mensaje a enviar.
+	 */
 	public void enviarMensaje(String mensaje) {
 		
 		try {
@@ -51,8 +71,12 @@ public class ConexionCliente extends Thread{
 				
 	}
 	
+	/**
+	 * Este metodo se encarga de inicializar o correr el hilo del servidor.
+	 */
 	public void run() {
 		
+		//Creacion de variable.
 		String texto;
 		
 		while(true) {

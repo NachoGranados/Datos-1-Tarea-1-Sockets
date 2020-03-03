@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"SocketsCliente","l":"ChatCliente"},{"p":"SocketsServidor","l":"ChatServidor"},{"p":"SocketsCliente","l":"ConexionCliente"},{"p":"SocketsServidor","l":"ConexionServidor"},{"p":"SocketsCliente","l":"MainCliente"},{"p":"SocketsServidor","l":"MainServidor"},{"p":"SocketsVentanaInicio","l":"VentanaInicio"}]
