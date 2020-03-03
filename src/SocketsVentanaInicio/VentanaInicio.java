@@ -3,6 +3,7 @@ package SocketsVentanaInicio;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -14,11 +15,12 @@ import SocketsServidor.ChatServidor;
 import SocketsServidor.ConexionServidor;
 import SocketsCliente.ConexionCliente;
 import SocketsCliente.MainCliente;
+import javax.swing.JScrollPane;
+import java.awt.Font;
 
 public class VentanaInicio {
 
 	private JFrame frame;
-	private JTextField areaNombre;
 	private JTextField areaPuerto;
 	private JTextArea areaPuertosConsultados;
 	public static ArrayList<String> listaPuertos = new ArrayList<String>();
@@ -49,26 +51,25 @@ public class VentanaInicio {
 		frame.getContentPane().setLayout(null);
 		
 		JLabel labelPuertosConsultados = new JLabel("Puertos Consultados");
-		labelPuertosConsultados.setBounds(10, 11, 125, 14);
+		labelPuertosConsultados.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelPuertosConsultados.setBounds(10, 11, 165, 14);
 		frame.getContentPane().add(labelPuertosConsultados);
 		
 		JButton botonNuevoChat = new JButton("Nuevo Chat");
+		botonNuevoChat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		botonNuevoChat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String nombre = areaNombre.getText();
+			public void actionPerformed(ActionEvent evento) {
+
 				puerto = areaPuerto.getText();
 				cargar = false;
+				String antes = "";
 				
-				if(nombre == "" || puerto == "") {
-					
-					System.out.print("No se puede ejecutar el chat");
-					
-				} else {
-					
+				try {					
+											
 					if(listaPuertos.contains(puerto) == false) {
 						
 						listaPuertos.add(puerto);
+						antes = areaPuertosConsultados.getText();
 						areaPuertosConsultados.setText(areaPuertosConsultados.getText() + "\n" + puerto);
 						areaPuerto.setText("");
 						
@@ -87,37 +88,49 @@ public class VentanaInicio {
 						
 						ChatServidor.listaConversaciones.add(puerto);
 						
-					}					
+					}				
+																								
+				} catch (NumberFormatException e) {
+					
+					areaPuertosConsultados.setText(antes);
+					JOptionPane.showMessageDialog(null, "Puero incorrecto. Por favor digite un puerto numérico.");
+					listaPuertos.remove(puerto);
+					
+				}
 				
-				} 
 			}
 				
 		});
 		
-		botonNuevoChat.setBounds(145, 125, 125, 23);
+		botonNuevoChat.setBounds(155, 203, 269, 47);
 		frame.getContentPane().add(botonNuevoChat);
 		
-		areaPuertosConsultados = new JTextArea();
-		areaPuertosConsultados.setBounds(10, 36, 119, 214);
-		frame.getContentPane().add(areaPuertosConsultados);
-		
-		areaNombre = new JTextField();
-		areaNombre.setBounds(145, 38, 279, 20);
-		frame.getContentPane().add(areaNombre);
-		areaNombre.setColumns(10);
-		
-		JLabel labelNombre = new JLabel("Digite su nombre:");
-		labelNombre.setBounds(145, 11, 279, 14);
-		frame.getContentPane().add(labelNombre);
-		
 		JLabel labelPuerto = new JLabel("Digite el puerto al cual quiere conectarse:");
-		labelPuerto.setBounds(145, 69, 279, 14);
+		labelPuerto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		labelPuerto.setBounds(155, 127, 295, 23);
 		frame.getContentPane().add(labelPuerto);
 		
 		areaPuerto = new JTextField();
-		areaPuerto.setBounds(145, 94, 279, 20);
+		areaPuerto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		areaPuerto.setBounds(155, 161, 269, 31);
 		frame.getContentPane().add(areaPuerto);
 		areaPuerto.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 36, 135, 214);
+		frame.getContentPane().add(scrollPane);
+		
+		areaPuertosConsultados = new JTextArea();
+		scrollPane.setViewportView(areaPuertosConsultados);
+		
+		JLabel labelTarea1 = new JLabel("Tarea 1");
+		labelTarea1.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		labelTarea1.setBounds(226, 11, 135, 47);
+		frame.getContentPane().add(labelTarea1);
+		
+		JLabel labelSockets = new JLabel("Sockets");
+		labelSockets.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		labelSockets.setBounds(226, 69, 135, 47);
+		frame.getContentPane().add(labelSockets);
 	}
-	
 }
