@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class ChatCliente {
 
+	//Creacion de variables.
 	private JFrame frame;
 	public static JTextField areaTexto;
 	public static JTextArea areaMensajes;	
@@ -38,6 +39,7 @@ public class ChatCliente {
 	}
 
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,8 +47,10 @@ public class ChatCliente {
 		JButton botonEnviar = new JButton("Enviar");
 		botonEnviar.setBounds(335, 227, 89, 23);
 		botonEnviar.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				
+				//Asignacion de datos a algunas variables creadas.
 				String texto = areaTexto.getText();
 				int longitud = VentanaInicio.listaPuertos.size() - 1;
 								
@@ -56,11 +60,12 @@ public class ChatCliente {
 					
 				}
 				
+				//Conexion con el socket para enviar mensajes.
 				MainCliente.cliente.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Cliente: " + texto + "\n");
 				areaTexto.setText("");
 				
-				
+				//Condicion que verifica si se debe cargar una conversacion anterior.
 				if(VentanaInicio.cargar == true) {	
 					
 					ChatServidor.listaConversaciones.set(indice, areaMensajes.getText());	
@@ -73,6 +78,7 @@ public class ChatCliente {
 				
 			}
 		});
+		
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(botonEnviar);
 		
@@ -81,10 +87,13 @@ public class ChatCliente {
 		botonConectarse.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				//Asignacion del ip de la computadora
 				MainCliente.iniciarCliente("127.0.0.1");
 				
+				//Creacion de esta variable.
 				indice = VentanaInicio.listaPuertos.indexOf(VentanaInicio.puerto);
 				
+				//Condicion que verifica si se debe cargar una conversacion anterior.
 				if(VentanaInicio.cargar == true) {					
 				
 					String conversacion = ChatServidor.listaConversaciones.get(indice);
@@ -95,6 +104,7 @@ public class ChatCliente {
 				
 			}
 		});
+		
 		frame.getContentPane().add(botonConectarse);
 		
 		JLabel labelCliente = new JLabel("Cliente");

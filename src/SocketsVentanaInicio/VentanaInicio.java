@@ -58,14 +58,18 @@ public class VentanaInicio {
 		JButton botonNuevoChat = new JButton("Nuevo Chat");
 		botonNuevoChat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		botonNuevoChat.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent evento) {
-
+				
+				//Creacion de variables
 				puerto = areaPuerto.getText();
 				cargar = false;
 				String antes = "";
 				
+				//Manejo de errores para que el usuario siempre digite un puerto numerico
 				try {					
-											
+								
+					//Primera condicion que verifica si se desea cargar una conversacion anterior
 					if(listaPuertos.contains(puerto) == false) {
 						
 						listaPuertos.add(puerto);
@@ -78,18 +82,21 @@ public class VentanaInicio {
 						cargar = true;
 						
 					}
-												
+					
+					//Conexion con el socket que el usuario solicito
 					ConexionServidor.puerto = Integer.parseInt(puerto);
 					ConexionCliente.puerto = Integer.parseInt(puerto);
 					MainServidor.main();
 					MainCliente.main();					
-
+					
+					//Segunda condicion que verifica si se desea cargar una conversacion anterior
 					if(cargar != true) {
 						
 						ChatServidor.listaConversaciones.add(puerto);
 						
 					}				
-																								
+					
+				  //No se abre la conexion socket hasta que el usuario digite correctamente el puerto.
 				} catch (NumberFormatException e) {
 					
 					areaPuertosConsultados.setText(antes);
@@ -132,5 +139,6 @@ public class VentanaInicio {
 		labelSockets.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		labelSockets.setBounds(226, 69, 135, 47);
 		frame.getContentPane().add(labelSockets);
+		
 	}
 }

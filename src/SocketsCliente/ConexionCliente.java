@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class ConexionCliente extends Thread{
 	
-	//Creacion de variables
+	//Creacion de variables.
 	static Socket socket;
 	static ServerSocket serverSocket;
 	private InputStreamReader entradaSocket;
@@ -21,13 +21,14 @@ public class ConexionCliente extends Thread{
 		
 		try {
 			
+			//Inicializacion del cliente.
 			ConexionCliente.socket = new Socket(ip, puerto);
 			
-			//Creacion de entrada de datos para lectura de datos
+			//Creacion de variables para la entrada de datos.
 			this.entradaSocket = new InputStreamReader(socket.getInputStream());
 			this.entrada = new BufferedReader(entradaSocket);
 			
-			//Creacion de la salida de datos para la lectura de mensajes
+			//Creacion de variables para la salida de mensajes.
 			this.salida = new DataOutputStream(socket.getOutputStream());
 
 		} catch (Exception e) {
@@ -40,6 +41,7 @@ public class ConexionCliente extends Thread{
 		
 		try {
 			
+			//Envio de mensaje.
 			this.salida = new DataOutputStream(socket.getOutputStream());
 			this.salida.writeUTF(mensaje + "\n");
 			
@@ -57,6 +59,7 @@ public class ConexionCliente extends Thread{
 			
 			try {
 				
+				//Agregar mensaje recibido.
 				texto = this.entrada.readLine();
 				ChatCliente.areaMensajes.setText(ChatCliente.areaMensajes.getText() + "Servidor: " + texto + "\n");
 								

@@ -6,6 +6,7 @@ public class MainServidor {
 
 	public static void main() {
 		
+		//Creacion e inicializacion de la ventana del servidor.
 		ChatServidor servidor = new ChatServidor();
 		servidor.main();
 
@@ -13,6 +14,7 @@ public class MainServidor {
 	
 	public static void iniciarServidor() {
 		
+		//Inicializacion del socket junto con su respectivo hilo.
 		servidor = new ConexionServidor();
 		servidor.start();
 				

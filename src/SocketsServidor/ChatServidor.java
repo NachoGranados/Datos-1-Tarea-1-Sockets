@@ -16,6 +16,7 @@ import SocketsVentanaInicio.VentanaInicio;
 
 public class ChatServidor {
 
+	//Creacion de variables.
 	private JFrame frame;
 	public static JTextField areaTexto;
 	public static JTextArea areaMensajes;
@@ -52,6 +53,7 @@ public class ChatServidor {
 
 			public void actionPerformed(ActionEvent e) {
 								
+				//Asignacion de datos a algunas variables creadas.
 				String texto = areaTexto.getText();
 				int longitud = VentanaInicio.listaPuertos.size() - 1;
 				
@@ -60,11 +62,13 @@ public class ChatServidor {
 					longitud = 0;
 					
 				}		
-					
+				
+				//Conexion con el socket para enviar mensajes.
 				MainServidor.servidor.enviarMensaje(texto);
 				areaMensajes.setText(areaMensajes.getText() + "Servidor: " + texto + "\n");
 				areaTexto.setText("");
 				
+				//Condicion que verifica si se debe cargar una conversacion anterior.
 				if(VentanaInicio.cargar == true) {	
 					
 					listaConversaciones.set(indice, areaMensajes.getText());
@@ -83,12 +87,16 @@ public class ChatServidor {
 		
 		JButton botonIniciarServidor = new JButton("Iniciar Servidor");
 		botonIniciarServidor.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				
+				//Creacion de esta variable.
 				indice = VentanaInicio.listaPuertos.indexOf(VentanaInicio.puerto);
 				
+				//Inicio de la conxion socket.
 				MainServidor.iniciarServidor();				
 				
+				//Condicion que verifica si se debe cargar una conversacion anterior.
 				if(VentanaInicio.cargar == true) {
 					
 					String conversacion = listaConversaciones.get(indice);
@@ -121,10 +129,12 @@ public class ChatServidor {
 		
 		botonCerrarChat = new JButton("Cerrar Chat");
 		botonCerrarChat.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent evento) {
 				
 				try {
 					
+					//Se cierra el puerto.
 					VentanaInicio.cargar = false;
 					ConexionServidor.serverSocket.close();
 					
@@ -134,6 +144,7 @@ public class ChatServidor {
 				
 			}
 		});
+		
 		botonCerrarChat.setBounds(304, 11, 120, 23);
 		frame.getContentPane().add(botonCerrarChat);
 	}
